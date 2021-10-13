@@ -19,8 +19,10 @@ class PdoProjet0
 
 	/* La fonction _destruction  */
 	public function _destruction(){
-		PdoGSB::$monPdo = null;
+		PdoProjet0::$monPdo = null;
 	}
+
+	//public PDO::prepare(string $query, array $options = []): PDOStatement|false
 
 	/* La fonction getPdo  */
 	public static function getPdo()
@@ -164,8 +166,8 @@ class PdoProjet0
 
 	public function inscription($login,$mdp,$name,$prenom)
 	{
-		$req = "INSERT INTO membre (login, mdp, nomU, prenom, poste, recetteNoteMoyenne, nbRecettePub) VALUES ( '$login', '$mdp', '$name', '$prenom', 'visiteur', null, null)";
-		$res = PdoMegaptera::$monPdo->query($req);
+		$req = "INSERT INTO `utilisateurs`(`login`, `mdp`, `nomU`, `prenom`, `poste`, `recetteNoteMoyenne`, `nbRecettePub`) VALUES ( '$login', '$mdp', '$name', '$prenom', 'visiteur', null, null)";
+		$res = PdoProjet0::$monPdo->query($req);
 	}
 }
 ?>

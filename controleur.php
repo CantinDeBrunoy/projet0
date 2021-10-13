@@ -155,20 +155,18 @@ switch($action)
 
 	case 'inscription':
 	{
-		if (empty($_REQUEST['nom']) || empty($_REQUEST['prenom']) || empty($_REQUEST['loginI']) || empty($_REQUEST['mdpI']))
+		if (empty($_REQUEST['loginI']) || empty($_REQUEST['mdpI']) || empty($_REQUEST['nom']) || empty($_REQUEST['prenom']))
 		{
-			?><a id="Error"><?php echo "Une information n\'a pas été remplie";?><br></a><?php
+			?><a id="Error"><?php echo "Une information n'a pas été remplie";?><br></a><?php
 			include("vue/connexion.php");
 		}
 		else {
-			$name = $_REQUEST['name'];
 			$loginI = $_REQUEST['loginI'];
-			$prenom = $_REQUEST['prenom'];
-			$mail = $_REQUEST['mail'];
-			$numberI = $_REQUEST['numberI'];
 			$mdpI = $_REQUEST['mdpI'];
+			$name = $_REQUEST['nom'];
+			$prenom = $_REQUEST['prenom'];
 		
-			$pdo -> inscription($name,$prenom,$loginI,$mdpI,$numberI,$mail);
+			$pdo -> inscription($loginI, $mdpI, $name, $prenom);
 			//$_SESSION['nom'] = $pdo -> getNom($_REQUEST['loginI']);
 			//$_SESSION['prenom'] = $pdo -> getPrenom($_REQUEST['loginI']);
 			include("vue/membreAjouter.php");
