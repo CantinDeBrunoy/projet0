@@ -2,7 +2,7 @@
 
 $json = array();
 foreach($comm as $name){
-	array_push($json['commentaires'], array(
+	array_push($json, array(
 		"idCom" => $name['idCom'],
 		"auteurCom" => $name['auteurId'],
 		"contenuCom" => $name['contenu'],
@@ -14,7 +14,5 @@ foreach($comm as $name){
 }
 $json = json_encode($json);
 file_put_contents('jsonCommentaires.json', $json);
-header('Content-Type: application/json');
-echo $json;
 
 ?>

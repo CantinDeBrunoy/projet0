@@ -3,7 +3,7 @@
 $json = array();
 
 foreach($rece as $name){
-	array_push($json['recettes'], array(
+	array_push($json, array(
 		"idRec" => $name['id'],
 		"auteurRec" => $name['auteurId'],
 		"ingredientsRec" => $name['ingredients'],
@@ -18,7 +18,5 @@ foreach($rece as $name){
 }
 $json = json_encode($json);
 file_put_contents('jsonRecettes.json', $json);
-header('Content-Type: application/json');
-echo $json;
 
 ?>

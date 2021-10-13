@@ -26,8 +26,19 @@ switch($action)
 	{
 		$categorie = $_REQUEST['nomCateg'];
 		if (!empty($categorie)){
-			$categ = $pdo -> getCategorieN($_REQUEST['nomCateg']);
+			$categ = $pdo -> getCategorieN($categorie);
 			include("API/categorieAPI.php");
+
+			$api_url = 'jsonCategorie.json';
+
+			// Read JSON file
+			$json_data = file_get_contents($api_url);
+
+			// Decode JSON data into PHP array
+			$response_data = json_decode($json_data,true);
+
+			// All user data exists in 'data' object
+			$user_data = $response_data[0];
 		}
 		else {
 			$categ = $pdo -> getCategorie();
@@ -42,6 +53,17 @@ switch($action)
 		if (!empty($commentaire)){
 			$comm = $pdo -> getCommentairesA($_REQUEST['commIdAut']);
 			include("API/commentairesAPI.php");
+
+			$api_url = 'jsonCommentaires.json';
+
+			// Read JSON file
+			$json_data = file_get_contents($api_url);
+
+			// Decode JSON data into PHP array
+			$response_data = json_decode($json_data,true);
+
+			// All user data exists in 'data' object
+			$user_data = $response_data[0];
 		}
 		else {
 			$comm = $pdo -> getCommentairesTT();
@@ -56,6 +78,17 @@ switch($action)
 		if (!empty($recette)){
 			$rece = $pdo -> getRecettesN($_REQUEST['nomRecette']);
 			include("API/recettesAPI.php");
+
+			$api_url = 'jsonRecettes.json';
+
+			// Read JSON file
+			$json_data = file_get_contents($api_url);
+
+			// Decode JSON data into PHP array
+			$response_data = json_decode($json_data,true);
+
+			// All user data exists in 'data' object
+			$user_data = $response_data[0];
 		}
 		else {
 			$rece = $pdo -> getRecettesTT();
@@ -70,6 +103,17 @@ switch($action)
 		if (!empty($utilisateur)){
 			$utili = $pdo -> getUtilisateursPre($_REQUEST['prenomUili']);
 			include("API/utilisateursAPI.php");
+
+			$api_url = 'jsonUtilisateurs.json';
+
+			// Read JSON file
+			$json_data = file_get_contents($api_url);
+
+			// Decode JSON data into PHP array
+			$response_data = json_decode($json_data,true);
+
+			// All user data exists in 'data' object
+			$user_data = $response_data[0];
 		}
 		else {
 			$utili = $pdo -> getUtilisateurs();
