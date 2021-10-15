@@ -169,5 +169,11 @@ class PdoProjet0
 		$req = "INSERT INTO `utilisateurs`(`login`, `mdp`, `nomU`, `prenom`, `poste`, `recetteNoteMoyenne`, `nbRecettePub`) VALUES ( '$login', '$mdp', '$name', '$prenom', 'visiteur', null, null)";
 		$res = PdoProjet0::$monPdo->query($req);
 	}
+
+	public function ajouterRecette($idAuteur,$lien,$nom,$typeRecette,$ing,$desc)
+	{
+		$req = "INSERT INTO `recettes`(`auteurId`, `nom`, `ingredients`, `description`, `image`, `etat`, `categorieId`, `datePublication`) VALUES ($idAuteur,'$nom','$ing','$desc','$lien','en attente',$typeRecette,now())";
+		$res = PdoProjet0::$monPdo->query($req);
+	}
 }
 ?>

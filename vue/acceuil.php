@@ -1,7 +1,7 @@
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=categories">
 	<h1>Accueil</h1>
 	<p>Regarde les informations des catégories selon leur ID</p>
-	<SELECT name="nomCateg">
+	<SELECT name="categId" id="nomCateg">
 		<option value=''>----</option>
 		<?php foreach($categ as $name):?>
 			<option><?php echo $name['id'];?></option>
@@ -13,7 +13,7 @@
 
 
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=commentaires">
-	<p>Rechercher un commentaire selon la recette sur laquel il a été publié</p>
+	<p>Rechercher des commentaires selon la recette sur laquel ils ont été publié</p>
 	<SELECT name="commIdAut">
 		<option value=''>----</option>
 		<?php foreach($comm as $name):?>
@@ -26,7 +26,7 @@
 
 
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=recettes">
-	<p>Recherhcer un plat selon la catégorie</p>
+	<p>Rechercher des plats selon la catégorie</p>
 	<SELECT name="nomRecette">
 		<option value=''>----</option>
 		<?php foreach($rece as $name):?>
@@ -39,7 +39,7 @@
 
 
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=utilisateurs">
-	<p>Recher les informations des utilisateurs selon leur prenom</p>
+	<p>Rechercher les informations des utilisateurs selon leur prenom</p>
 	<SELECT name="prenomUili">
 		<option value=''>----</option>
 		<?php foreach($utili as $name):?>
@@ -51,7 +51,7 @@
 </form>
 
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=connexion">
-	<p>Connexion</p>
+	<h3>Connexion</h3>
 	<div id = "Button">
 		<input type = "submit" value = "Connexion" name = "valider">
 	</div>

@@ -1,0 +1,14 @@
+RewriteEngine On # Activer le module Rewrite
+RewriteRule ^categories/?$ categories_ID.php [NC,L]
+
+RewriteRule ^utilisateurs/?$ utilisateurs_ID.php [NC,L]
+
+RewriteRule ^commentaires/?$ commentaires_recetteID.php [NC,L]
+
+RewriteRule ^recettes/?$ recettes_categorieID.php [NC,L]
+
+RewriteRule ^utilisateursP/?$ utilisateurs_prenom.php [NC,L]
+
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type, Authorization"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"

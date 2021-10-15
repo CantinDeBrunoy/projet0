@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 06 oct. 2021 à 15:54
+-- Généré le :  ven. 15 oct. 2021 à 15:14
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.1.33
 
@@ -74,6 +74,19 @@ INSERT INTO `commentaires` (`idCom`, `auteurId`, `contenu`, `etat`, `date`, `rec
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `notes`
+--
+
+CREATE TABLE `notes` (
+  `id` int(11) NOT NULL,
+  `note` int(2) NOT NULL,
+  `auteurId` int(9) NOT NULL,
+  `recetteId` int(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `recettes`
 --
 
@@ -85,7 +98,7 @@ CREATE TABLE `recettes` (
   `description` text NOT NULL,
   `note` int(2) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `etat` enum('publie','en attente') NOT NULL,
+  `etat` enum('publie','en attente','signale') NOT NULL,
   `categorieId` int(9) NOT NULL,
   `datePublication` date NOT NULL,
   `nbCom` int(9) DEFAULT NULL
@@ -131,7 +144,8 @@ CREATE TABLE `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id`, `login`, `mdp`, `nomU`, `prenom`, `poste`, `recetteNoteMoyenne`, `nbRecettePub`) VALUES
 (1, 'chef', 'chef', 'Roquier', 'Cantin', 'admin', 4, 1),
-(2, 'dev', 'devop', 'Chadli', 'Adel', 'visiteur', 0, 0);
+(2, 'dev', 'devop', 'Chadli', 'Adel', 'visiteur', 0, 0),
+(3, 'test2', 'tesst', 'je suis', 'inscrit', 'visiteur', NULL, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -150,6 +164,14 @@ ALTER TABLE `commentaires`
   ADD PRIMARY KEY (`idCom`),
   ADD KEY `auteurId` (`auteurId`),
   ADD KEY `recetteId` (`recetteId`);
+
+--
+-- Index pour la table `notes`
+--
+ALTER TABLE `notes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `recetteId` (`recetteId`),
+  ADD KEY `auteurId` (`auteurId`);
 
 --
 -- Index pour la table `recettes`
@@ -182,6 +204,12 @@ ALTER TABLE `commentaires`
   MODIFY `idCom` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT pour la table `notes`
+--
+ALTER TABLE `notes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `recettes`
 --
 ALTER TABLE `recettes`
@@ -191,7 +219,7 @@ ALTER TABLE `recettes`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Contraintes pour les tables déchargées
@@ -203,6 +231,13 @@ ALTER TABLE `utilisateurs`
 ALTER TABLE `commentaires`
   ADD CONSTRAINT `commentaires_ibfk_1` FOREIGN KEY (`auteurId`) REFERENCES `utilisateurs` (`id`),
   ADD CONSTRAINT `commentaires_ibfk_2` FOREIGN KEY (`recetteId`) REFERENCES `recettes` (`id`);
+
+--
+-- Contraintes pour la table `notes`
+--
+ALTER TABLE `notes`
+  ADD CONSTRAINT `auteurId` FOREIGN KEY (`auteurId`) REFERENCES `utilisateurs` (`id`),
+  ADD CONSTRAINT `recetteId` FOREIGN KEY (`recetteId`) REFERENCES `recettes` (`id`);
 
 --
 -- Contraintes pour la table `recettes`
