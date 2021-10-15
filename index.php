@@ -19,6 +19,7 @@ switch($uc)
 			$categ = $pdo -> getCategorie();
 			$comm = $pdo -> getCommentaires();
 			$rece = $pdo -> getRecettes();
+			$receID = $pdo -> getRecettesTT();
 			$utili = $pdo -> getUtilisateurs();
 		    include("vue/acceuil.php");
 		    break;

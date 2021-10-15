@@ -13,6 +13,7 @@ switch($action)
 		$categ = $pdo -> getCategorie();
 		$comm = $pdo -> getCommentaires();
 		$rece = $pdo -> getRecettes();
+		$receID = $pdo -> getRecettesTT();
 		$utili = $pdo -> getUtilisateurs();
 		include("vue/acceuil.php");
 		break;
@@ -93,6 +94,28 @@ switch($action)
 		break;
 	}
 	
+	case 'recettesID':
+	{
+			//réception du l'ID et du nom de la categorie sélectionné
+			$recette = $_REQUEST['nomRecetteID'];
+			if (!empty($recette))
+			{
+				//lien ci dessous préétablie dans le fichier .htaccess ligne 8
+				$rece = file_get_contents("http://127.0.0.1/Projet0/API/recettesID/?id=".$recette);
+				//affichage de l'API selon l'id de la categorie choisi(voir fichier API/recettes_categorieID pour comprendre comment sa marche)
+				echo $rece;
+				
+			}
+			else
+			{
+				//reception de l'API pour tous les plats
+				$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesID/");
+				//affichage de l'API (voir fichier API/recettes_categorieID pour comprendre comment sa marche)
+				echo $rece;
+			}
+			break;
+	}
+
 	case 'utilisateurs':
 	{
 		//réception du prenom de li'utilisateur sélectionné

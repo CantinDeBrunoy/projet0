@@ -6,6 +6,7 @@ RewriteRule ^utilisateurs/?$ utilisateurs_ID.php [NC,L]
 RewriteRule ^commentaires/?$ commentaires_recetteID.php [NC,L]
 
 RewriteRule ^recettes/?$ recettes_categorieID.php [NC,L]
+RewriteRule ^recettesID/?$ recettes_ID.php [NC,L]
 
 RewriteRule ^utilisateursP/?$ utilisateurs_prenom.php [NC,L]
 

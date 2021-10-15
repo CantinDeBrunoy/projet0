@@ -37,6 +37,18 @@
 	</div>
 </form>
 
+<form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=recettesID">
+	<p>Rechercher des plats selon son ID</p>
+	<SELECT name="nomRecetteID">
+		<option value=''>----</option>
+		<?php foreach($receID as $name):?>
+			<option><?php echo $name['id'];?></option>
+		<?php endforeach;?>
+	<div id = "Button">
+		<input type = "submit" value = "Recettes" name = "valider">
+	</div>
+</form>
+
 
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=utilisateurs">
 	<p>Rechercher les informations des utilisateurs selon leur prenom</p>
