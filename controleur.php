@@ -31,6 +31,7 @@ switch($action)
 			//affichage de l'API pour une catégorie choisi(voir fichier API/categorie_ID pour comprendre comment sa marche)
 			echo $categ;
 		}
+
 		else 
 		{
 			//affichage de l'API pour toutes les catégorie
@@ -57,6 +58,7 @@ switch($action)
 			//affichage de l'API selon l'id du plat choisi(voir fichier API/commentaires_recetteID pour comprendre comment sa marche)
 			echo $comm;
 		}
+
 		else 
 		{
 			//reception de l'API pour tous les commentaires
@@ -84,6 +86,7 @@ switch($action)
 			echo $rece;
 			
 		}
+
 		else
 		{
 			//reception de l'API pour tous les plats
@@ -96,24 +99,24 @@ switch($action)
 	
 	case 'recettesID':
 	{
-			//réception du l'ID et du nom de la categorie sélectionné
-			$recette = $_REQUEST['nomRecetteID'];
-			if (!empty($recette))
-			{
-				//lien ci dessous préétablie dans le fichier .htaccess ligne 8
-				$rece = file_get_contents("http://127.0.0.1/Projet0/API/recettesID/?id=".$recette);
-				//affichage de l'API selon l'id de la categorie choisi(voir fichier API/recettes_categorieID pour comprendre comment sa marche)
-				echo $rece;
-				
-			}
-			else
-			{
-				//reception de l'API pour tous les plats
-				$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesID/");
-				//affichage de l'API (voir fichier API/recettes_categorieID pour comprendre comment sa marche)
-				echo $rece;
-			}
-			break;
+		//réception du l'ID et du nom de la categorie sélectionné
+		$recette = $_REQUEST['nomRecetteID'];
+		if (!empty($recette))
+		{
+			//lien ci dessous préétablie dans le fichier .htaccess ligne 8
+			$rece = file_get_contents("http://127.0.0.1/Projet0/API/recettesID/?id=".$recette);
+			//affichage de l'API selon l'id de la categorie choisi(voir fichier API/recettes_categorieID pour comprendre comment sa marche)
+			echo $rece;		
+		}
+
+		else
+		{
+			//reception de l'API pour tous les plats
+			$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesID/");
+			//affichage de l'API (voir fichier API/recettes_categorieID pour comprendre comment sa marche)
+			echo $rece;
+		}
+		break;
 	}
 
 	case 'utilisateurs':
@@ -127,6 +130,7 @@ switch($action)
 			//affichage de l'API selon le prenom choisi(voir fichier API/utilisateurs_prenom pour comprendre comment sa marche)
 			echo $prenomUtili;
 		}
+
 		else 
 		{
 			//reception de l'API pour tous les utilisateurs
@@ -172,27 +176,38 @@ switch($action)
 			// All user data exists in 'data' object
 			$user_data = $response_data[0];
 
-			foreach ($user_data as $key => $value) {
-				if($key == 'loginUtil') { 
-					$_SESSION['login'] = "{$value}";
-				}
-				if($key == 'mdpUtil') { 
-					$_SESSION['mdp'] = "{$value}";
-				}
-				if($key == 'nomUtil') { 
-					$_SESSION['nom'] = "{$value}";
-				}
-				if($key == 'prenomUtil') { 
-					$_SESSION['prenom'] = "{$value}";
-				}
-				if($key == 'roleUtil') { 
-					$_SESSION['poste'] = "{$value}";
-				}
-				if($key == 'moyenneUtil') { 
-					$_SESSION['moyenne'] = "{$value}";
-				}
-				if($key == 'nbRecUtil') { 
-					$_SESSION['nbRec'] = "{$value}";
+			foreach ($user_data as $key => $value) 
+			{
+				switch($key)
+				{
+					case 'loginUtil':
+					{ 
+						$_SESSION['login'] = "{$value}";
+					}
+					case 'mdpUtil':
+					{ 
+						$_SESSION['mdp'] = "{$value}";
+					}
+					case 'nomUtil':
+					{ 
+						$_SESSION['nom'] = "{$value}";
+					}
+					case 'prenomUtil':
+					{ 
+						$_SESSION['prenom'] = "{$value}";
+					}
+					case 'roleUtil':
+					{ 
+						$_SESSION['poste'] = "{$value}";
+					}
+					case 'moyenneUtil':
+					{ 
+						$_SESSION['moyenne'] = "{$value}";
+					}
+					case 'nbRecUtil':
+					{ 
+						$_SESSION['nbRec'] = "{$value}";
+					}
 				}
 			}
 		}
@@ -210,6 +225,10 @@ switch($action)
 			echo "vous estes connectez en tant que ",$_SESSION['login']," ",$_SESSION['nom']," ",$_SESSION['prenom'];
 			include("vue/acceuil.php");
 			include("vue/ajoutRecette.php");
+			if($_SESSION['poste'] == 'admin')
+			{
+				include("vue/confirmeRecette.php");
+			}
 		}
 		break;
 	}
@@ -222,7 +241,9 @@ switch($action)
 			?><a id="Error"><?php echo "Une information n'a pas été remplie";?><br></a><?php
 			include("vue/connexion.php");
 		}
-		else {
+
+		else 
+		{
 			//association des champs d'entré a des variables
 			$loginI = $_REQUEST['loginI'];
 			$mdpI = $_REQUEST['mdpI'];
@@ -240,7 +261,8 @@ switch($action)
 	case 'ajoutRecette':
 	{
 		session_start();
-		if(!isset($_SESSION['prenom'])){
+		if(!isset($_SESSION['prenom']))
+		{
 			setcookie('PHPSESSID', null, -1, '/');
 			header('location: http://localhost/Projet0/index.php?uc=controleur&action=connexion');
 		}
@@ -270,7 +292,8 @@ switch($action)
 			?><a id="ErrorExt"><?php echo "Le fichier n'a pas l'extension attendue (jpeg/jpg/pdf)";?><br></a><?php
 			$rec = $pdo -> getRecettes();
 			include("vue/ajouterRecette.php");
-		} 
+		}
+
 		else
 		{    
 			// Copie dans le repertoire du script avec un nom incluant l'heure a la seconde pres 
@@ -294,9 +317,29 @@ switch($action)
 					include("vue/acceuil.php");
 				}
 			}
-		break;
 		}
+	break;
 	}
 	
+	case 'confirmeRecette':
+	{
+		$rece = $pdo -> getRecettesTTAtt();
+		include("vue/administration.php");
+	break;
+	}
+
+	case 'confirmeRece.'.$_REQUEST['id']:
+	{
+		$rece = $pdo -> getRecettesTT();
+		include("vue/administration.php");
+	break;
+	}
+
+	case 'confirmeRece.'.$_REQUEST['id']:
+	{
+		$rece = $pdo -> getRecettesTT();
+		include("vue/administration.php");
+	break;
+	}	
 }
 ?>

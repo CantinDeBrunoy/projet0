@@ -92,6 +92,14 @@ class PdoProjet0
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+
+	public function getRecettesTTAtt()
+	{
+		$req = "SELECT * FROM recettes WHERE etat='en attente';";
+		$res = PdoProjet0::$monPdo->query($req);
+		$lesLignes = $res->fetchAll();
+		return $lesLignes;
+	}
 	
 	public function getRecettesN($nom)
 	{
