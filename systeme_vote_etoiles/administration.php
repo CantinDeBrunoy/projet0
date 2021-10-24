@@ -14,7 +14,7 @@ if($_SESSION['role'] != 'admin') {
 //CODER ICI (car vérification de droits au dessus)
 echo('<h1>PAGE ADMIN</h1><br />');
 //Récupérer tous les commentaires avec l'état "signale" par le biais d'un service (pour l'instant requête SQL)
-include("./db_connect.php");
+/*include("./db_connect.php");
 
 $query="SELECT * FROM commentaires WHERE etat='signale'";
 $exec = mysqli_query($conn, $query);
@@ -22,7 +22,10 @@ $res = array();
 
 while($row = mysqli_fetch_array($exec, MYSQLI_ASSOC)) {
     $res[] = $row;
-}
+}*/
+
+$get_content_json = file_get_contents("http://localhost/p/systeme_vote_etoiles/api/commentaires_etat?etat='signale'");
+$res = json_decode($get_content_json);
 ?>
 
 <table>
@@ -32,14 +35,21 @@ while($row = mysqli_fetch_array($exec, MYSQLI_ASSOC)) {
         </tr>
     </thead>
     <tbody>
-        <?php if(count($res) == 0) echo "<td> Aucune commentaire actuellement signalé. </td>";
+        <tr>
+            <td>ID</td>
+            <td>ID de l'auteur</td>
+            <td>Contenu</td>
+            <td>Date de publication</td>
+            <td>ID de la recette</td>
+        </tr>
+        <?php if(count($res) == 0) echo "<td colspan='5'> Aucune commentaire actuellement signalé. </td>";
         for($i = 0; $i < count($res); $i++) {?>
             <tr>
-                <td><?php echo "L'id du commantaire est : <b>", $res[$i]['idCom']; ?></b></td>
-                <td><?php echo "L'id de l'auteur est : <b>", $res[$i]['auteurId']; ?></b></td>
-                <td><?php echo "Contenu : <b>", $res[$i]['contenu']; ?></b></td>
-                <td><?php echo "Date de publication : <b>", $res[$i]['dateC']; ?></b></td>
-                <td><?php echo "Commentaire de la recette dont l'id est : <b>", $res[$i]['recetteId']; ?></b></td>
+                <td><?php echo "<b>", $res[$i]->idCom; ?></b></td>
+                <td><?php echo "<b>", $res[$i]->auteurId; ?></b></td>
+                <td><?php echo "<b>", $res[$i]->contenu; ?></b></td>
+                <td><?php echo "<b>", $res[$i]->dateC; ?></b></td>
+                <td><?php echo "<b>", $res[$i]->recetteId; ?></b></td>
             </tr>  
         <?php } ?>
     </tbody>
@@ -50,7 +60,7 @@ while($row = mysqli_fetch_array($exec, MYSQLI_ASSOC)) {
     <select name="commentaires_signales" id="commentaires_signales">
         <option value="">--- Choisir un commentaire ---</option>
     <?php for($i = 0; $i < count($res); $i++) { ?>
-        <option value="<?php echo $res[$i]['idCom']; ?>"><?php echo "Commentaire avec id n°",$res[$i]['idCom']; ?></option>
+        <option value="<?php echo $res[$i]->idCom; ?>"><?php echo "Commentaire avec id n°",$res[$i]->idCom; ?></option>
         <?php } ?>
     </select>
     <input type="submit" value="Valider" name="valider">
@@ -70,5 +80,4 @@ if(isset($_GET['success'])) {
         echo "<p style='color:red'>Rencontre d'un problème. Aucun changement dans la base de données.</p>";
     }
 }
-
 ?>

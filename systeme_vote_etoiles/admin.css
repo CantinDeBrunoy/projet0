@@ -1,8 +1,10 @@
-table {
+table, th, tr {
     border: 1px solid black;
+    text-align: center;
 }
 
 td {
-  border-top: 1px solid black;
+  
+  text-align: center;
 
 }
