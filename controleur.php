@@ -28,16 +28,14 @@ switch($action)
 		{
 			//lien ci dessous préétablie dans le fichier .htaccess ligne 2
 			$categ= trim(file_get_contents("http://127.0.0.1/Projet0/API/categories/?id=".$categorie));
-			//affichage de l'API pour une catégorie choisi(voir fichier API/categorie_ID pour comprendre comment sa marche)
-			echo $categ;
+			$categ_data = json_decode($categ);
 		}
 
 		else 
 		{
 			//affichage de l'API pour toutes les catégorie
 			$categ= file_get_contents("http://127.0.0.1/Projet0/API/categories/");
-			//affichage de l'API (voir fichier API/categorie_ID pour comprendre comment sa marche
-			echo $categ;
+			$categ_data = json_decode($categ);
 		}
 		break;
 	}
@@ -55,16 +53,14 @@ switch($action)
 			$idComm = trim($tabComm[0]);
 			//lien ci dessous préétablie dans le fichier .htaccess ligne 6
 			$comm = file_get_contents("http://127.0.0.1/Projet0/API/commentaires/?id=".$idComm);
-			//affichage de l'API selon l'id du plat choisi(voir fichier API/commentaires_recetteID pour comprendre comment sa marche)
-			echo $comm;
+			$comm_data = json_decode($comm);
 		}
 
 		else 
 		{
 			//reception de l'API pour tous les commentaires
 			$comm= file_get_contents("http://127.0.0.1/Projet0/API/commentaires/");
-			//affichage de l'API (voir fichier API/commentaires_recetteID pour comprendre comment sa marche)
-			echo $comm;
+			$comm_data = json_decode($comm);
 		}
 		break;
 	}
@@ -82,17 +78,14 @@ switch($action)
 			$idReceCatId = trim($rece[0]);
 			//lien ci dessous préétablie dans le fichier .htaccess ligne 8
 			$rece = file_get_contents("http://127.0.0.1/Projet0/API/recettes/?id=".$idReceCatId);
-			//affichage de l'API selon l'id de la categorie choisi(voir fichier API/recettes_categorieID pour comprendre comment sa marche)
-			echo $rece;
-			
+			$rece_data = json_decode($rece);
 		}
 
 		else
 		{
 			//reception de l'API pour tous les plats
 			$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettes/");
-			//affichage de l'API (voir fichier API/recettes_categorieID pour comprendre comment sa marche)
-			echo $rece;
+			$rece_data = json_decode($rece);
 		}
 		break;
 	}
@@ -105,16 +98,14 @@ switch($action)
 		{
 			//lien ci dessous préétablie dans le fichier .htaccess ligne 8
 			$rece = file_get_contents("http://127.0.0.1/Projet0/API/recettesID/?id=".$recette);
-			//affichage de l'API selon l'id de la categorie choisi(voir fichier API/recettes_categorieID pour comprendre comment sa marche)
-			echo $rece;		
+			$rece_data = json_decode($rece);
 		}
 
 		else
 		{
 			//reception de l'API pour tous les plats
 			$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesID/");
-			//affichage de l'API (voir fichier API/recettes_categorieID pour comprendre comment sa marche)
-			echo $rece;
+			$rece_data = json_decode($rece);
 		}
 		break;
 	}
@@ -127,16 +118,14 @@ switch($action)
 		{
 			//lien ci dessous préétablie dans le fichier .htaccess ligne 10
 			$prenomUtili= trim(file_get_contents("http://127.0.0.1/Projet0/API/utilisateursP/?prenom='".$utilisateur."'"));
-			//affichage de l'API selon le prenom choisi(voir fichier API/utilisateurs_prenom pour comprendre comment sa marche)
-			echo $prenomUtili;
+			$prenomUtili_data = json_decode($prenomUtili);
 		}
 
 		else 
 		{
 			//reception de l'API pour tous les utilisateurs
 			$prenomUtili= file_get_contents("http://127.0.0.1/Projet0/API/utilisateursP/");
-			//affichage de l'API (voir fichier API/utilisateurs_prenom pour comprendre comment sa marche)
-			echo $prenomUtili;
+			$prenomUtili_data = json_decode($prenomUtili);
 		}
 		break;
 	}
@@ -251,7 +240,7 @@ switch($action)
 			$prenom = $_REQUEST['prenom'];
 		
 			//inserssion de l'utilisateur dans la BDD
-			$pdo -> inscription($loginI, $mdpI, $name, $prenom);
+			file_get_contents("http://127.0.0.1/Projet0/API/ajoutUtilisateur/?loginI=".$loginI."&mdpI=".$mdpI."&name=".$name."&prenom=".$prenom."");
 			include("vue/membreAjouter.php");
 		}
 	
@@ -321,21 +310,28 @@ switch($action)
 	break;
 	}
 	
-	case 'confirmeRecette':
+	case 'Administration':
 	{
+		session_start();
+		if($_SESSION['poste'] != "admin")
+		{
+			setcookie('PHPSESSID', null, -1, '/');
+			header('location: http://localhost/Projet0/index.php?uc=controleur&action=connexion');
+		}
 		$rece = $pdo -> getRecettesTTAtt();
 		include("vue/administration.php");
 	break;
 	}
 
-	case 'confirmeRece.'.$_REQUEST['id']:
+	case 'confirmeRece':
 	{
-		$rece = $pdo -> getRecettesTT();
-		include("vue/administration.php");
+		$id = $_REQUEST['id'];
+		file_get_contents("http://127.0.0.1/Projet0/API/recetteAjoute/?id=".$id);
+		include("vue/recetteAjoute.php");
 	break;
 	}
 
-	case 'confirmeRece.'.$_REQUEST['id']:
+	case 'SupprRece'.$_REQUEST['id']:
 	{
 		$rece = $pdo -> getRecettesTT();
 		include("vue/administration.php");

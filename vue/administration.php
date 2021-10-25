@@ -1,15 +1,15 @@
 	<h1>Administration</h1>
-	<p>Confirmé l'ajout d'une recette</p>
     <table>
-            <thead>
-                <tr>
-                    <th colspan="2">The table header</th>
-                </tr>
-            </thead>
-		<?php foreach($rece as $name):?>
-        <form enctype="multipart/form-data" metdod="post" action="index.php?uc=controleur&action=confirmeRece<?php $name['id'];?>">
-            <tbody>
-                <tr>
+        <thead>
+            <tr>
+                <th colspan="2">Confirmé l'ajout d'une recette</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+		        <?php foreach($rece as $name):?>
+                    <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=confirmeRece">
+                    <input name = "id" value = "<?php echo $name['id'];?>"hidden>
                     <td><?php echo $name['id'];?></td>
                     <td><?php echo $name['auteurId'];?></td>
                     <td><?php echo $name['nom'];?></td>
@@ -20,14 +20,15 @@
                     <td><?php echo $name['categorieId'];?></td>
                     <td><?php echo $name['datePublication'];?></td>
                     <div id = "Button">
-		                <td><input type = "submit" value = "Valider recette" name = "valider"></td>
+                        <td><input type = "submit" value = "Validé la recette" name = "valider"></td>
 	                </div>
-        </form>
-        <form enctype="multipart/form-data" metdod="post" action="index.php?uc=controleur&action=SupprRece<?php $name['id'];?>">
-            <div id = "Button">
-		        <td><input type = "submit" value = "Refuser recette" name = "valider"></td>
-	        </div></tr>
-        </form>
-		<?php endforeach;?>
-            </tbody>
+                    </form>
+                    <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=SupprRece">
+                    <div id = "Button">
+		                <td><input type = "submit" value = "Refuser la recette" name = "valider"></td>
+	                </div>
+            </tr>
+                    </form>
+                <?php endforeach;?>
+        </tbody>
     </table>
