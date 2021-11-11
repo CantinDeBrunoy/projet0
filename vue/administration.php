@@ -15,7 +15,9 @@
                     <td><?php echo $name['nom'];?></td>
                     <td><?php echo $name['ingredients'];?></td>
                     <td><?php echo $name['description'];?></td>
-                    <td><?php echo $name['image'];?></td>
+                    <?php if ($name['image']){ ?>
+                        <td><img id="img" src="<?php echo $name['image'];?>"/></td>
+                    <?php } ?>
                     <td><?php echo $name['etat'];?></td>
                     <td><?php echo $name['categorieId'];?></td>
                     <td><?php echo $name['datePublication'];?></td>

@@ -22,6 +22,22 @@
     <label for = "nom">Description</label>
         <textarea placeholder="Entrer la recette détaillé" name="description" required></textarea>
     </p>
+
+    <p>
+    <label for = "nom">Temps de préparation</label>
+        <input type="time" name="temps" min="00:00" max="23:59" required>
+    </p>
+
+    <p>
+    <label for = "nom">Difficulté</label>
+        <SELECT name="difficulte">
+		    <option value=''>----</option>
+			<option value='debutant'>Débutant</option>
+            <option value='intermediaire'>Intermédiaire</option>
+            <option value='confirme'>Confirmé</option>
+            <option value='expert'>Expert</option>
+        </SELECT>
+    </p>
     
     <p>
         <input type="hidden" name="MAX_FILE_SIZE" value="10000000000000000000000000000000000000000000000000000000000000000000000" />

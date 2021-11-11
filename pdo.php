@@ -95,7 +95,7 @@ class PdoProjet0
 
 	public function getRecettesTTAtt()
 	{
-		$req = "SELECT * FROM recettes WHERE etat='en attente';";
+		$req = "SELECT * FROM recettes WHERE etat='en attente' OR etat='signale';";
 		$res = PdoProjet0::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
@@ -178,9 +178,9 @@ class PdoProjet0
 		$res = PdoProjet0::$monPdo->query($req);
 	}
 
-	public function ajouterRecette($idAuteur,$lien,$nom,$typeRecette,$ing,$desc)
+	public function ajouterRecette($idAuteur,$lienIMG,$nom,$typeRecette,$ing,$desc,$tps,$diff)
 	{
-		$req = "INSERT INTO `recettes`(`auteurId`, `nom`, `ingredients`, `description`, `image`, `etat`, `categorieId`, `datePublication`) VALUES ($idAuteur,'$nom','$ing','$desc','$lien','en attente',$typeRecette,now())";
+		$req = "INSERT INTO `recettes`(`auteurId`, `nom`, `ingredients`, `description`, `image`, `etat`, `categorieId`, `datePublication`, `tps_prépa`, `difficulte`) VALUES ($idAuteur,'$nom','$ing','$desc','$lienIMG','en attente',$typeRecette,now(),'$tps','$diff')";
 		$res = PdoProjet0::$monPdo->query($req);
 	}
 }

@@ -8,6 +8,7 @@ RewriteRule ^commentaires/?$ commentaires_recetteID.php [NC,L]
 
 RewriteRule ^recettes/?$ recettes_categorieID.php [NC,L]
 RewriteRule ^recettesID/?$ recettes_ID.php [NC,L]
+RewriteRule ^recettesAleatoire/?$ recettes_aleatoire.php [NC,L]
 RewriteRule ^recettesAttente/?$ recettes_attente.php [NC,L]
 RewriteRule ^recetteAjoute/?$ recetteAjoute.php [NC,L]
 

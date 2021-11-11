@@ -22,6 +22,7 @@ switch($uc)
 			$receID = $pdo -> getRecettesTT();
 			$utili = $pdo -> getUtilisateurs();
 		    include("vue/acceuil.php");
+			include("vue/btnConnexion.php");
 		    break;
 		}
 	case 'controleur':

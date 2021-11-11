@@ -16,6 +16,7 @@ switch($action)
 		$receID = $pdo -> getRecettesTT();
 		$utili = $pdo -> getUtilisateurs();
 		include("vue/acceuil.php");
+		include("vue/btnConnexion.php");
 		break;
 	}
 	
@@ -130,6 +131,15 @@ switch($action)
 		break;
 	}
 
+	case 'aleatoire':
+	{
+		$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesAleatoire/");
+		$rece_data = json_decode($rece);
+		var_dump($rece);
+
+		break;
+	}
+
 	case 'connexion':
 	{
 		include("vue/connexion.php");
@@ -169,6 +179,10 @@ switch($action)
 			{
 				switch($key)
 				{
+					case 'idUtil':
+					{ 
+						$_SESSION['id'] = "{$value}";
+					}
 					case 'loginUtil':
 					{ 
 						$_SESSION['login'] = "{$value}";
@@ -269,6 +283,8 @@ switch($action)
 		$typeRecette = trim($type[0]);
 		$ing = $_REQUEST['ingredients'];
 		$desc = $_REQUEST['description'];
+		$tps = $_REQUEST['temps'];
+		$diff = $_REQUEST['difficulte'];
 		$idAuteur = $_SESSION['id'];
 		
 		$nomOrigine = $_FILES['nomIMG']['name'];
@@ -288,22 +304,24 @@ switch($action)
 			// Copie dans le repertoire du script avec un nom incluant l'heure a la seconde pres 
 			$repertoireDestination = dirname(__FILE__)."/img";
 			$nomDestination = "/fichier_du_".date("YmdHis").".".$extensionFichier;
-			$lienIMG = $repertoireDestination.$nomDestination;
-			var_dump($lienIMG);
 
 			if (move_uploaded_file($_FILES["nomIMG"]["tmp_name"],$repertoireDestination.$nomDestination)) 
 			{
 				if (isset($_REQUEST['nomRec'])&&isset($_REQUEST['typeRec'])&&isset($_REQUEST['ingredients'])&&isset($_REQUEST['description']))
 				{	
 					$pieces = explode("/", $repertoireDestination);
-					$repertoireDestination = "/";
-					$pdo -> ajouterRecette($idAuteur,$lienIMG,$nom,$typeRecette,$ing,$desc);
+					$repertoireDestination = $pieces[1];
+					$lienIMG = $repertoireDestination.$nomDestination;
+					$pdo -> ajouterRecette($idAuteur,$lienIMG,$nom,$typeRecette,$ing,$desc,$tps,$diff);
 					?><br><a id="Error"><?php echo 'L\'ajout de la recette à bien été réaliser';?></a><br><?php
 					$categ = $pdo -> getCategorie();
 					$comm = $pdo -> getCommentaires();
 					$rece = $pdo -> getRecettes();
 					$utili = $pdo -> getUtilisateurs();
 					include("vue/acceuil.php");
+					if ($_SESSION['poste'] == 'admin' ){
+						include("vue/confirmeRecette.php");
+					}
 				}
 			}
 		}
