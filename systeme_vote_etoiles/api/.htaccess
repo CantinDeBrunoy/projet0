@@ -1,0 +1,10 @@
+RewriteEngine On 
+# Active le module Rewrite
+
+# Réécriture d'URL :
+RewriteRule ^commentairesForm/?$ ../commentaire/commentairesForm.php [NC,L]
+RewriteRule ^signaleCommentaire/?$ ./post_commentaire_signale_by_id.php [NC,L]
+
+Header add Access-Control-Allow-Origin "*"
+Header add Access-Control-Allow-Headers "origin, x-requested-with, content-type, Authorization"
+Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"

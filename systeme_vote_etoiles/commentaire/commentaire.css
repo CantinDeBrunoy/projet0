@@ -2,6 +2,11 @@
     border: thick double #32a1ce;
 }
 
+.signale {
+    border-bottom: 1px solid black;
+    color: #32a1ce;
+}
+
 /*
 .auteurComm{ div contenant Publié par : [Nom Prénom]}
 .contenuComm { div contenant  Contenu du commentaire : [Contenu]}

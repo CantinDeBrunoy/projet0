@@ -14,15 +14,6 @@ if($_SESSION['role'] != 'admin') {
 //CODER ICI (car vérification de droits au dessus)
 echo('<h1>PAGE ADMIN</h1><br />');
 //Récupérer tous les commentaires avec l'état "signale" par le biais d'un service (pour l'instant requête SQL)
-/*include("./db_connect.php");
-
-$query="SELECT * FROM commentaires WHERE etat='signale'";
-$exec = mysqli_query($conn, $query);
-$res = array();
-
-while($row = mysqli_fetch_array($exec, MYSQLI_ASSOC)) {
-    $res[] = $row;
-}*/
 
 $get_content_json = file_get_contents("http://localhost/p/systeme_vote_etoiles/api/commentaires_etat?etat='signale'");
 $res = json_decode($get_content_json);
@@ -45,39 +36,19 @@ $res = json_decode($get_content_json);
         <?php if(count($res) == 0) echo "<td colspan='5'> Aucune commentaire actuellement signalé. </td>";
         for($i = 0; $i < count($res); $i++) {?>
             <tr>
-                <td><?php echo "<b>", $res[$i]->idCom; ?></b></td>
+                <?php $id = $res[$i]->idCom; ?>
+                <td><?php echo "<b>", $id; ?></b></td>
                 <td><?php echo "<b>", $res[$i]->auteurId; ?></b></td>
                 <td><?php echo "<b>", $res[$i]->contenu; ?></b></td>
                 <td><?php echo "<b>", $res[$i]->dateC; ?></b></td>
                 <td><?php echo "<b>", $res[$i]->recetteId; ?></b></td>
+                <td><a href="./api/post_commentaire_valide_by_id?id=<?php echo $id; ?>">Valider</td>
+                <td><a href="./api/post_commentaire_supprime_by_id?id=<?php echo $id; ?>">Supprimer</td>
             </tr>  
         <?php } ?>
     </tbody>
 </table>
 <br />
-<form action="./commentaire/suppression-validationCommentaire.php" method="POST">
-    
-    <select name="commentaires_signales" id="commentaires_signales">
-        <option value="">--- Choisir un commentaire ---</option>
-    <?php for($i = 0; $i < count($res); $i++) { ?>
-        <option value="<?php echo $res[$i]->idCom; ?>"><?php echo "Commentaire avec id n°",$res[$i]->idCom; ?></option>
-        <?php } ?>
-    </select>
-    <input type="submit" value="Valider" name="valider">
-    <input type="submit" value="Supprimer" name="supprimer">
-</form>
+
 <a href="./commentaire/commentairesForm.php">Redirection vers la page de commentaires.</a><br />
 <a href="./index.php?deconnexion=true">Deconnexion</a>
-<?php
-if(isset($_GET['success'])) {
-    if($_GET['success'] == 1) {
-        echo "<p style='color:green'>Commentaire validé avec succès.</p>";
-    }
-    else if($_GET['success'] == 2) {
-        echo "<p style='color:green'>Commentaire supprimé avec succès.</p>";
-    }
-    else if($_GET['success'] == 3) {
-        echo "<p style='color:red'>Rencontre d'un problème. Aucun changement dans la base de données.</p>";
-    }
-}
-?>

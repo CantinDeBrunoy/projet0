@@ -7,7 +7,7 @@ if(!isset($_SESSION['username'])){
 }
 ?>
 <link rel="stylesheet" href="commentaire.css">
-<form action="commentaire.php" method="POST">
+<form action="addCommentaire.php" method="POST">
     <h1>Ajout d'un commentaire pour la recette 1 par défaut</h1>
     
     <label><b>Commentaire</b></label>
@@ -36,6 +36,7 @@ while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
 }
 ?>
 <div class="contentComm">
+    <h2>LISTE DES COMMENTAIRES</h2>
     <?php
     for($i=0; $i < count($tabQuery); $i++) {
 
@@ -50,7 +51,7 @@ while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
             <div class='auteurComm'>Publié par : <?php echo $tabNomPrenomAuteur['prenom']." ".$tabNomPrenomAuteur['nomU']; ?> <br /><br />
             <form action="./signaleCommentaire.php" method="POST">
                 <input type="hidden" name="commentaireSignale" value="<?php echo $tabQuery[$i]['idCom'];?>">
-                <input type="submit" name="signaler" value="Signaler">
+                <div class="signale"><a href="./api/post_commentaire_signale_by_id?id=<?php echo $tabQuery[$i]['idCom'];?>">Signaler</a></div>
     </form>
         </div>       
     </div><br />
@@ -59,9 +60,3 @@ while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
     ?>
 </div>
 <a href="../index.php">Redirection vers la page d'accueil</a>
-<?php 
-if(isset($_GET['success'])) {
-    if($_GET['success'] == 1) {
-        echo "<p style='color:green'>Commentaire signalé avec succès.</p>";
-    }
-}
