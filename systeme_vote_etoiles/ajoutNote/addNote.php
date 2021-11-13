@@ -1,5 +1,5 @@
 <?php
-include("../db_connect.php");
+include("../api/db_connect.php");
 if(!empty($_POST['note'])) {
     session_start();
     

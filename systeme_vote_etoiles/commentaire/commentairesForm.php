@@ -24,7 +24,7 @@ if(isset($_GET['send'])) {
     }
 }
 
-include('../db_connect.php');
+include('../api/db_connect.php');
 global $conn;
 
 $requete = "SELECT * FROM commentaires WHERE recetteId=1 AND etat='publie'";

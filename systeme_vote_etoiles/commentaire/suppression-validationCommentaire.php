@@ -1,5 +1,5 @@
 <?php
-include('../db_connect.php');
+include('../api/db_connect.php');
 $commentaireSelectionne = $_POST['commentaires_signales'];
 
 if(isset($_POST['supprimer'])) {

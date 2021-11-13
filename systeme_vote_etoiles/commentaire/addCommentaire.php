@@ -3,7 +3,7 @@
 if(isset($_POST['commentaire'])) {
     session_start();
     // connexion à la base de données
-    include("../db_connect.php");
+    include("../api/db_connect.php");
     global $conn;
 
     $auteurId = intval($_SESSION['id']);

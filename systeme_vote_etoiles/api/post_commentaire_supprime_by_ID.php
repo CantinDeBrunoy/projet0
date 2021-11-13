@@ -4,7 +4,7 @@
   /************************************************************/
 
   // Se connecter à la base de données
-  include("../db_connect.php");
+  include("./db_connect.php");
   $request_method = $_SERVER["REQUEST_METHOD"];
 
   switch($request_method)
