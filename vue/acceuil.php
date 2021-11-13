@@ -63,5 +63,9 @@
 </form>
 
 <form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=aleatoire">
-	<input type = "submit" value = "recettes aléatoire" name = "valider">
+	<input type = "submit" value = "Recettes aléatoire" name = "valider">
+</form>
+
+<form enctype="multipart/form-data" method="post" action="index.php?uc=controleur&action=tendance">
+	<input type = "submit" value = "Recettes tendance" name = "valider">
 </form>

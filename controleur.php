@@ -131,6 +131,15 @@ switch($action)
 		break;
 	}
 
+	case 'tendance':
+	{
+		$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesTendance/");
+		$rece_data = json_decode($rece);
+		var_dump($rece);
+	
+		break;
+	}
+
 	case 'aleatoire':
 	{
 		$rece= file_get_contents("http://127.0.0.1/Projet0/API/recettesAleatoire/");
@@ -351,8 +360,9 @@ switch($action)
 
 	case 'SupprRece'.$_REQUEST['id']:
 	{
-		$rece = $pdo -> getRecettesTT();
-		include("vue/administration.php");
+		$id = $_REQUEST['id'];
+		file_get_contents("http://127.0.0.1/Projet0/API/recetteSupprime/?id=".$id);
+		include("vue/recetteAjoute.php");
 	break;
 	}	
 }
