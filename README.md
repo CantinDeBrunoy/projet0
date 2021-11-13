@@ -67,3 +67,10 @@
   -> <b>GET</b> id(int)<br />
   -> <b>RETURN</b> void<br />
 </p>
+
+<p>
+  <h3>Service qui supprime une recette selon l'ID</h3>
+  <b><i>recetteSupprime.php</i></b> :<br/>
+  -> <b>GET</b> id(int)<br />
+  -> <b>RETURN</b> void<br />
+</p>
