@@ -291,7 +291,29 @@ switch($action)
 		$type = explode("-", $Type);
 		$typeRecette = trim($type[0]);
 		$ing = $_REQUEST['ingredients'];
-		$desc = $_REQUEST['description'];
+		switch($_REQUEST['nombreEtape']){
+			case'2':
+			{
+				$desc = $_REQUEST['etape1']+$_REQUEST['etape2'];
+				break;
+			}
+			case'3':
+			{
+				$desc = $_REQUEST['etape1']+$_REQUEST['etape2']+$_REQUEST['etape3'];
+				break;
+			}
+			case'4':
+			{
+				$desc = $_REQUEST['etape1']+$_REQUEST['etape2']+$_REQUEST['etape3']+$_REQUEST['etape4'];
+				break;
+			}
+			case'5':
+			{
+				$desc = $_REQUEST['etape1']+$_REQUEST['etape2']+$_REQUEST['etape3']+$_REQUEST['etape4']+$_REQUEST['etape5'];
+				break;
+			}
+		}
+		//$desc = $_REQUEST['description'];
 		$tps = $_REQUEST['temps'];
 		$diff = $_REQUEST['difficulte'];
 		$idAuteur = $_SESSION['id'];
@@ -321,9 +343,10 @@ switch($action)
 					$pieces = explode("/", $repertoireDestination);
 					$repertoireDestination = $pieces[1];
 					$lienIMG = $repertoireDestination.$nomDestination;
-					$pdo -> ajouterRecette($idAuteur,$lienIMG,$nom,$typeRecette,$ing,$desc,$tps,$diff);
+					//$pdo -> ajouterRecette($idAuteur,$lienIMG,$nom,$typeRecette,$ing,$desc,$tps,$diff);
 					?><br><a id="Error"><?php echo 'L\'ajout de la recette à bien été réaliser';?></a><br><?php
 					$categ = $pdo -> getCategorie();
+					var_dump($desc);
 					$comm = $pdo -> getCommentaires();
 					$rece = $pdo -> getRecettes();
 					$utili = $pdo -> getUtilisateurs();
@@ -354,6 +377,7 @@ switch($action)
 	{
 		$id = $_REQUEST['id'];
 		file_get_contents("http://127.0.0.1/Projet0/API/recetteAjoute/?id=".$id);
+		?><br><a id="Succes"><?php echo 'La confirmation de la recette à bien été réaliser';?></a><br><?php
 		include("vue/recetteAjoute.php");
 	break;
 	}
@@ -362,6 +386,7 @@ switch($action)
 	{
 		$id = $_REQUEST['id'];
 		file_get_contents("http://127.0.0.1/Projet0/API/recetteSupprime/?id=".$id);
+		?><br><a id="Delete"><?php echo 'Le refus de la recette à bien été réaliser';?></a><br><?php
 		include("vue/recetteAjoute.php");
 	break;
 	}	
