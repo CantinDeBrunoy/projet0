@@ -49,8 +49,8 @@
   //Fonction pour encoder en JSON et récupérer le message de statut de la requête
   function encodeJSON($response) {
     header('Content-Type: application/json');
-    //JSON_PRETTY_PRINT : belle affichage dans le front, JSON_UNESCAPED_UNICODE : utf-8
-    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    //JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE : belle affichage dans le front, JSON_UNESCAPED_UNICODE : utf-8
+    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
   }
   
 ?>

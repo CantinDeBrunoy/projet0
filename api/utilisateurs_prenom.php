@@ -35,7 +35,7 @@
       $response[] = $row;
     }
     header('Content-Type: application/json');
-    echo json_encode($response, JSON_PRETTY_PRINT);
+    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
   }
 
   function getUtilisateur($prenom)
@@ -53,6 +53,6 @@
       $response[] = $row;
     }
     header('Content-Type: application/json');
-    echo json_encode($response, JSON_PRETTY_PRINT);
+    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
   }
 ?>
