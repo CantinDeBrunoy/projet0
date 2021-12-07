@@ -55,6 +55,13 @@
 </p>
 
 <p>
+  <h3>Service qui recupère une recette selon l'ID ou toutes les recettes publiée(s)</h3>
+  <b><i>recettes_attente.php</i></b> :<br/>
+  -> <b>GET</b>id(int) ou void<br />
+  -> <b>RETURN</b> id(int), auteurId(int), nom(string), ingredients(string), description(string), note(int), image(string), etat(string), categorieId(int), datePublication(date), nbCom(int), tps_prepa(timestamp), difficulte(string)<br />
+</p>
+
+<p>
   <h3>Service qui recupère toutes les recettes ou une recette selon l'ID</h3>
   <b><i>recettes_ID.php</i></b> :<br/>
   -> <b>GET</b> id(int) ou void<br />
