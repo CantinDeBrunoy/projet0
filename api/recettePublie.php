@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST');
+header("Access-Control-Allow-Headers: X-Requested-With");
   // Se connecter à la base de données
   include("./db_connect.php");
   $request_method = $_SERVER["REQUEST_METHOD"];
@@ -27,7 +30,7 @@
     {
       $query .= " WHERE id='".$id."'";
     }
-    $result = mysqli_query($conn, $query);
+    mysqli_query($conn, $query);
     header('Content-Type: application/json');
   }
 ?>

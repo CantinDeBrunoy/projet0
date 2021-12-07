@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST');
+header("Access-Control-Allow-Headers: X-Requested-With");
   /******************************************************************************************************/
   /* SERVICE API QUI MODIFIE L'ETAT D'UN COMMENTAIRE EN 'publie' SELON L'ID DONNÉ (SQL -> etat='publie')*/
   /******************************************************************************************************/
