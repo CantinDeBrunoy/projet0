@@ -62,11 +62,10 @@
 </p>
 
 <p>
-  <h3>Service qui recupère une recette aléatoirement</h3>
+  <h3>Service qui recupère 9 recettes aléatoirement</h3>
   <b><i>recettes_aleatoire.php</i></b> :<br/>
   -> <b>GET</b> void<br />
   -> <b>RETURN</b> id(int), auteurId(int), nom(string), ingredients(string), description(string), note(int), image(string), etat(string), categorieId(int), datePublication(date), nbCom(int), tps_prepa(timestamp), difficulte(string)<br />
-  <i>Retourne bien une recette, ne pas faire attention au 's' du nom de fichier. Je ne sais pas pourquoi il a renommé le fichier comme ça</i>
 </p>
 
 <p>

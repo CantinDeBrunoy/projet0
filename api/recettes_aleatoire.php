@@ -18,7 +18,7 @@
   function getRecetteRandom()
   {
     global $conn;
-    $query = "SELECT * FROM recettes ORDER BY RAND () LIMIT 1";
+    $query = "SELECT * FROM recettes ORDER BY RAND () LIMIT 9";
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
@@ -26,6 +26,6 @@
       $response[] = $row;
     }
     header('Content-Type: application/json');
-    echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+    echo json_encode($response, JSON_PRETTY_PRINT);
   }
 ?>
