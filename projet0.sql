@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 06 déc. 2021 à 14:23
--- Version du serveur :  10.4.10-MariaDB
--- Version de PHP :  7.1.33
+-- Généré le : mer. 08 déc. 2021 à 18:13
+-- Version du serveur :  10.4.14-MariaDB
+-- Version de PHP : 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `projet0`
+-- Base de données : `projet0`
 --
 
 -- --------------------------------------------------------
@@ -30,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `nomC` varchar(20) NOT NULL
+  `nomCategorie` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `categories`
 --
 
-INSERT INTO `categories` (`id`, `nomC`) VALUES
+INSERT INTO `categories` (`id`, `nomCategorie`) VALUES
 (1, 'Vegan'),
 (2, 'Carnivore'),
 (3, 'Oriental'),
@@ -147,7 +146,8 @@ CREATE TABLE `utilisateurs` (
 
 INSERT INTO `utilisateurs` (`id`, `login`, `mdp`, `nomU`, `prenom`, `poste`, `recetteNoteMoyenne`, `nbRecettePub`) VALUES
 (1, 'chef', 'chef', 'Roquier', 'Cantin', 'admin', 4, 1),
-(2, 'dev', 'devop', 'Chadli', 'Adel', 'visiteur', 0, 0);
+(2, 'dev', 'devop', 'Chadli', 'Adel', 'visiteur', 0, 0),
+(12, 'Joris', '0000', 'Margotteau', 'Joris', 'visiteur', NULL, NULL);
 
 --
 -- Index pour les tables déchargées
@@ -221,7 +221,7 @@ ALTER TABLE `recettes`
 -- AUTO_INCREMENT pour la table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Contraintes pour les tables déchargées

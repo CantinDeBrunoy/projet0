@@ -65,7 +65,7 @@
   <h3>Service qui recupère toutes les recettes ou une recette selon l'ID</h3>
   <b><i>recettes_ID.php</i></b> :<br/>
   -> <b>GET</b> id(int) ou void<br />
-  -> <b>RETURN</b> id(int), auteurId(int), nom(string), ingredients(string), description(string), note(int), image(string), etat(string), categorieId(int), datePublication(date), nbCom(int), tps_prepa(timestamp), difficulte(string)<br />
+  -> <b>RETURN</b> id(int), auteurId(int), nom(string), ingredients(string), description(string), note(int), image(string), etat(string), categorieId(int), nomCategorie(string) datePublication(date), nbCom(int), tps_prepa(timestamp), difficulte(string)<br />
 </p>
 
 <p>
@@ -108,14 +108,14 @@
   <h3>Service qui recupère une catégorie selon l'ID</h3>
   <b><i>categories_ID.php</i></b> :<br/>
   -> <b>GET</b> id(int)<br />
-  -> <b>RETURN</b> id(int), nomC(string)<br />
+  -> <b>RETURN</b> id(int), nomCategorie(string)<br />
 </p>
 
 <p>
   <h3>Service qui recupère les catégories qui ont au moins une recette</h3>
   <b><i>categories_utilisees.php</i></b> :<br/>
   -> <b>GET</b> void<br />
-  -> <b>RETURN</b> nomC(string), categorieId(int)<br />
+  -> <b>RETURN</b> nomCategorie(string), categorieId(int)<br />
 </p>
 
 <h2>Services pour les utilisateurs</h2>
