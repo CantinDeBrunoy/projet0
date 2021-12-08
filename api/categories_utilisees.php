@@ -21,7 +21,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
   function getRecettesCategID()
   {
     global $conn;
-    $query = "SELECT DISTINCT nomC, categorieId FROM categories
+    $query = "SELECT DISTINCT nomCategorie, categorieId FROM categories
               INNER JOIN recettes ON categories.id = recettes.categorieId;";
     $response = array();
     $result = mysqli_query($conn, $query);

@@ -31,7 +31,8 @@ header("Access-Control-Allow-Headers: X-Requested-With");
   function getRecettes()
   {
     global $conn;
-    $query = "SELECT * FROM recettes";
+    $query = "SELECT * FROM recettes
+              INNER JOIN categories ON recettes.categorieId = categories.id;";
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
@@ -45,7 +46,8 @@ header("Access-Control-Allow-Headers: X-Requested-With");
   function getRecette($id=0)
   {
     global $conn;
-    $query = "SELECT * FROM recettes";
+    $query = "SELECT * FROM recettes
+             INNER JOIN categories ON recettes.categorieId = categories.id;";
     if($id != 0)
     {
       $query .= " WHERE id=".$id."";
