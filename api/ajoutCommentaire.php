@@ -2,32 +2,33 @@
 	header('Access-Control-Allow-Origin: *');
 	header('Access-Control-Allow-Methods: GET, POST');
 	header("Access-Control-Allow-Headers: X-Requested-With");
-
+	
 	// Se connecter à la base de données
 	include("./db_connect.php");
+
 	$dataDecoded = json_decode(file_get_contents('php://input'), true);
 	if(empty($dataDecoded))
 	{
-		$response = array(
-			'status'=> 0,
-			'status_message'=> 'Aucune données récupérées !'
-		);
-		encodeJSON($response);
+	$response = array[
+		'status'=> 0,
+		'status_message'=> 'Aucune données récupérées !'
+	];
+	encodeJSON($response);
 	}
 	else {
-		addUtilisateur($dataDecoded);
+		addCommentaire($dataDecoded);
 	}
-
-	function addUtilisateur($dataDecoded)
+	
+	function addCommentaire($dataDecoded)
 	{
-		$login = $dataDecoded[0]['login'];
-		$mdp = $dataDecoded[0]['mdp'];
-		$nomU = $dataDecoded[0]['nomU'];
-		$prenom = $dataDecoded[0]['prenom'];
+		$auteurId = $dataDecoded[0]['auteurId'];
+		$contenu = $dataDecoded[0]['contenu'];
+		$etat = "publie";
+		$recetteId = $dataDecoded[0]['recetteId'];
 
 		global $conn;
-		$query = "INSERT INTO `utilisateurs`(`login`, `mdp`, `nomU`, `prenom`, `poste`) VALUES ( '$login', '$mdp', '$nomU', '$prenom', 'visiteur')";
-		mysqli_query($conn, $query);
+		$query = "INSERT INTO `commentaires`(`auteurId`, `contenu`, `etat`, `date`, `recetteId`) VALUES ( '$auteurId', '$contenu', '$etat', NOW(), '$recetteId')";
+		$result = mysqli_query($conn, $query);
 		$response = array(
 			'status'=> 1,
 			'status_message'=> 'Recette ajoutée avec succès !'
