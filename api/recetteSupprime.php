@@ -20,8 +20,8 @@
 		$response = array(
 		'status' => 0,
 		'status_message' => 'Aucune ID récupéré'
-		)
-		encodeJSON($response)
+		);
+		encodeJSON($response);
 	  }
 	  break;
 	default:
@@ -42,9 +42,9 @@
 		$response = array(
 			'status' => 1,
 			'status_message' => 'Recette supprimée avec succès.'
-		)
+		);
 		header('Content-Type: application/json');
-		encodeJSON($response)
+		encodeJSON($response);
 	}
 	
 	function encodeJSON($response) {
