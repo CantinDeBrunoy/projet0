@@ -50,7 +50,7 @@ header("Access-Control-Allow-Headers: X-Requested-With");
              INNER JOIN categories ON recettes.categorieId = categories.id;";
     if($id != 0)
     {
-      $query .= " WHERE id=".$id."";
+      $query .= " WHERE recettes.id=".$id."";
     }
     $response = array();
     $result = mysqli_query($conn, $query);
