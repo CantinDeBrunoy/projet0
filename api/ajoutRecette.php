@@ -20,14 +20,14 @@
 
 	function ajoutRecette($dataDecoded)
 	{
-		$auteurId = $dataDecoded[0]['auteurId'];
-		$nom = $dataDecoded[0]['nom'];
-		$ingredients = $dataDecoded[0]['ingredients'];
-		$description = $dataDecoded[0]['description'];
-		$note = $dataDecoded[0]['note'];
-		$etat = $dataDecoded[0]['etat'];
-		$categorieId = $dataDecoded[0]['categorieId'];
-		$difficulte = $dataDecoded[0]['difficulte'];
+		$auteurId = $dataDecoded['requestParameters']['auteurId'];
+		$nom = $dataDecoded['requestParameters']['nom'];
+		$ingredients = $dataDecoded['requestParameters']['ingredients'];
+		$description = $dataDecoded['requestParameters']['description'];
+		$note = $dataDecoded['requestParameters']['note'];
+		$etat = 'publie'
+		$categorieId = $dataDecoded['requestParameters']['categorieId'];
+		$difficulte = $dataDecoded['requestParameters']['difficulte'];
 
 		global $conn;
 		$query = "INSERT INTO `recettes`(`auteurId`, `nom`, `ingredients`, `description`, `note`, `etat`, `categorieId`, `datePublication`, `difficulte`) VALUES ( '$auteurId', '$nom', '$ingredients', '$description', '$note', '$etat', '$categorieId', NOW(), '$difficulte' )";
