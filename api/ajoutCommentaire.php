@@ -7,7 +7,7 @@
 	include("./db_connect.php");
 
 	$dataDecoded = json_decode(file_get_contents('php://input'), true);
-	if(empty($dataDecoded))
+	if($dataDecoded['requestParameters']['contenu'] == "")
 	{
 	$response = array[
 		'status'=> 0,
@@ -21,10 +21,10 @@
 	
 	function addCommentaire($dataDecoded)
 	{
-		$auteurId = $dataDecoded[0]['auteurId'];
-		$contenu = $dataDecoded[0]['contenu'];
+		$auteurId = $dataDecoded['requestParameters']['auteurId'];
+		$contenu = $dataDecoded['requestParameters']['contenu'];
 		$etat = "publie";
-		$recetteId = $dataDecoded[0]['recetteId'];
+		$recetteId = $dataDecoded['requestParameters']['recetteId'];
 
 		global $conn;
 		$query = "INSERT INTO `commentaires`(`auteurId`, `contenu`, `etat`, `date`, `recetteId`) VALUES ( '$auteurId', '$contenu', '$etat', NOW(), '$recetteId')";
